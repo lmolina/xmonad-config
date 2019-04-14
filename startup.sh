@@ -27,19 +27,19 @@ if [ -z "$(pgrep redshift)" ] ; then
     redshift &
 fi
 
+# Screensaver
+if [ -z "$(pgrep xscreensaver)" ] ; then
+    xscreensaver -no-splash &
+fi
+
 # Autolock
-# if [ -z "$(pgrep xautolock)" ] ; then
-    # xautolock -time 1 -locker "if ! grep 'RUNNING' /proc/asound/card*/pcm*/sub*/status;then xscreensaver-command -lock; else echo 'Sound on'; fi"
-# fi
+if [ -z "$(pgrep xautolock)" ] ; then
+    xautolock -time 10 -locker "xscreensaver-command -lock"
+fi
 
 # Wallpaper
 if [ -z "$(pgrep nitrogen)" ] ; then
     nitrogen --restore &
-fi
-
-# Screensaver
-if [ -z "$(pgrep xscreensaver)" ] ; then
-    xscreensaver -no-splash &
 fi
 
 # compton
@@ -53,8 +53,7 @@ if [ -z "$(pgrep nm-applet)" ] ; then
 fi
 
 # Google Drive
-if [ -z "$(pgrep insync)" ] ; then
-    insync start &
-fi
+#if [ -z "$(pgrep insync)" ] ; then
+#    insync start &
+#fi
 # xbindkeys
-xbindkeys

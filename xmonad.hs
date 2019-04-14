@@ -47,10 +47,11 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal = "termite"
+--myTerminal = "termite"
+myTerminal = "gnome-terminal"
 
 -- The command to lock the screen or show the screensaver.
-myScreensaver = "dm-tool switch-to-greeter"
+myScreensaver = "xscreensaver-command -lock"
 
 -- The command to take a selective screenshot, where you select
 -- what you'd like to capture on the screen.
@@ -69,7 +70,7 @@ myLauncher = "rofi -show"
 -- Workspaces
 -- The default number of workspaces (virtual screens) and their names.
 --
-myWorkspaces = ["1: term","2: web","3: code","4: media"] ++ map show [5..9]
+myWorkspaces = ["1: term","2: web","3: code","4: media"] ++ map show [5..8] ++ ["9: mail"]
 
 
 ------------------------------------------------------------------------
@@ -117,7 +118,7 @@ myManageHook = composeAll
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 
-outerGaps    = 10
+outerGaps    = 5
 myGaps       = gaps [(U, outerGaps), (R, outerGaps), (L, outerGaps), (D, outerGaps)]
 addSpace     = renamed [CutWordsLeft 2] . spacing gap
 tab          =  avoidStruts
@@ -192,8 +193,8 @@ cyan    = "#2aa198"
 green   = "#859900"
 
 -- sizes
-gap         = 10
-topbar      = 10
+gap         = 3
+topbar      = 10 
 border      = 0
 prompt      = 20
 status      = 20
@@ -266,7 +267,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- Spawn the launcher using command specified by myLauncher.
   -- Use this to launch programs without a key binding.
   , ((modMask, xK_p),
-     spawn myLauncher)
+       spawn myLauncher)
 
   -- Take a selective screenshot using the command specified by mySelectScreenshot.
   , ((modMask .|. shiftMask, xK_p),
@@ -524,7 +525,7 @@ main = do
 --
 defaults = def {
     -- simple stuff
-    terminal           = myTerminal,
+    --terminal           = myTerminal,
     focusFollowsMouse  = myFocusFollowsMouse,
     borderWidth        = myBorderWidth,
     modMask            = myModMask,
