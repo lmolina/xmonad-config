@@ -62,7 +62,7 @@ myScreenshot = "xfce4-screenshooter"
 
 -- The command to use as a launcher, to launch commands that don't have
 -- preset keybindings.
-myLauncher = "rofi -show"
+myLauncher = "rofi -modi \"run,window,ssh\" -show run"
 
 
 
