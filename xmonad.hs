@@ -55,7 +55,7 @@ myScreensaver = "xscreensaver-command -lock"
 
 -- The command to take a selective screenshot, where you select
 -- what you'd like to capture on the screen.
-mySelectScreenshot = "select-screenshot"
+mySelectScreenshot = "xfce4-screenshooter --fullscreen --save ~/"
 
 -- The command to take a fullscreen screenshot.
 myScreenshot = "xfce4-screenshooter"
@@ -89,11 +89,11 @@ myWorkspaces = ["1: term","2: web","3: code","4: media"] ++ map show [5..8] ++ [
 --
 myManageHook = composeAll
     [
-      className =? "Google-chrome"                --> doShift "2:web"
-    , resource  =? "desktop_window"               --> doIgnore
+      --className =? "Google-chrome"                --> doShift "2:web"
+    resource  =? "desktop_window"               --> doIgnore
     , className =? "Galculator"                   --> doCenterFloat
     , className =? "Steam"                        --> doCenterFloat
-    , className =? "Gimp"                         --> doCenterFloat
+    --, className =? "Gimp"                         --> doCenterFloat
     , resource  =? "gpicview"                     --> doCenterFloat
     , className =? "MPlayer"                      --> doCenterFloat
     , className =? "Pavucontrol"                  --> doCenterFloat
@@ -118,7 +118,7 @@ myManageHook = composeAll
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 
-outerGaps    = 5
+outerGaps    = 10
 myGaps       = gaps [(U, outerGaps), (R, outerGaps), (L, outerGaps), (D, outerGaps)]
 addSpace     = renamed [CutWordsLeft 2] . spacing gap
 tab          =  avoidStruts
@@ -193,8 +193,8 @@ cyan    = "#2aa198"
 green   = "#859900"
 
 -- sizes
-gap         = 3
-topbar      = 10 
+gap         = 5
+topbar      = 10
 border      = 0
 prompt      = 20
 status      = 20
@@ -376,11 +376,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- TODO: update this binding with avoidStruts, ((modMask, xK_b),
 
   -- Quit xmonad.
-  , ((modMask .|. shiftMask, xK_q),
+  , ((modMask .|. shiftMask, xK_z),
      io (exitWith ExitSuccess))
 
   -- Restart xmonad.
-  , ((modMask, xK_q),
+  , ((modMask, xK_z),
      restart "xmonad" True)
   ]
   ++
@@ -392,10 +392,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
   ++
 
-  -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-  -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
+  -- mod-{q,w,e}, Switch to physical/Xinerama screens 1, 2, or 3
+  -- mod-shift-{q,w,e}, Move client to screen 1, 2, or 3
   [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-      | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+      | (key, sc) <- zip [xK_q, xK_w, xK_e] [0..]
       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 
@@ -433,7 +433,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask .|. controlMask .|. shiftMask, xK_Down  ), sendMessage $ ShrinkFrom D)
   , ((modMask .|. controlMask,               xK_Up    ), sendMessage $ ExpandTowards U)
   , ((modMask .|. controlMask .|. shiftMask, xK_Up    ), sendMessage $ ShrinkFrom U)
-  , ((modMask,                               xK_r     ), sendMessage BSP.Rotate)
+  , ((modMask,                               xK_i     ), sendMessage BSP.Rotate)
+  --, ((modMask,                               xK_r     ), sendMessage BSP.Rotate)
   , ((modMask,                               xK_s     ), sendMessage BSP.Swap)
   -- , ((modMask,                               xK_n     ), sendMessage BSP.FocusParent)
   -- , ((modMask .|. controlMask,               xK_n     ), sendMessage BSP.SelectNode)
