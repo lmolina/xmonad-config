@@ -17,6 +17,9 @@ if [ -z "$(pgrep xfce4-power-manager)" ] ; then
     xfce4-power-manager &
 fi
 
+# Load configuration for X applications (e.g., rxvt-unicode)
+[ -r "${HOME}/.Xresources" ] && xrdb -merge "${HOME}/.Xresources"
+
 # Taffybar
 # if [ -z "$(pgrep taffybar)" ] ; then
 #     taffybar &
@@ -34,12 +37,14 @@ fi
 
 # Autolock
 if [ -z "$(pgrep xautolock)" ] ; then
-    xautolock -time 10 -locker "xscreensaver-command -lock"
+    xautolock -time 10 -locker "xscreensaver-command -lock" &
 fi
 
 # Wallpaper
-if [ -z "$(pgrep nitrogen)" ] ; then
-    nitrogen --restore &
+if [ -x /usr/bin/feh ]; then
+  if [ -r "${HOME}/.wallpaper.jpg" ] ; then
+    /usr/bin/feh --bg-fill "${HOME}/.wallpaper.jpg" &
+  fi
 fi
 
 # compton
