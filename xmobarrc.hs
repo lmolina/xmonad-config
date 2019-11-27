@@ -4,7 +4,7 @@ Config {
        , allDesktops = True
        , bgColor = "#282c34"
        , fgColor = "#bbc2cf"
-       , position = TopW L 95
+       , position = TopW L 90
        , commands = [ Run Cpu [ "--template", "<fc=#a9a1e1><fn=1></fn></fc> <total>%"
                               , "--Low","3"
                               , "--High","50"
