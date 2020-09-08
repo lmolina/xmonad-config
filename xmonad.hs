@@ -70,7 +70,7 @@ myLauncher = "rofi -modi \"run,window,ssh\" -show run"
 -- Workspaces
 -- The default number of workspaces (virtual screens) and their names.
 --
-myWorkspaces = ["1: term","2: web"] ++ map show [3..6] ++ ["7: On hold", "8: Films", "9: mail"]
+myWorkspaces = ["1: main","2: secondary", "3: on hold"] ++ map show [4..6] ++ ["7: journal", "8: films", "9: mail"]
 
 
 ------------------------------------------------------------------------
