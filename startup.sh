@@ -1,14 +1,21 @@
 #!/bin/sh
 
+[ -r /etc/profile ] && source /etc/profile
+[ -r $HOME/.profile ] && source $HOME/.profile
+
+function check_cmd () {
+	command -v "${1}" >/dev/null 2>&1;
+	return $?;
+}
+
 # System tray
 if [ -z "$(pgrep trayer)" ] ; then
     trayer --edge top \
            --align right \
-           --widthtype percent \
-           --height 24 \
+           --expand true \
            --alpha 0 \
            --transparent true \
-           --width 5 \
+           --width 10 \
            --tint 0x282c34 &
 fi
 
@@ -19,6 +26,9 @@ fi
 
 # Load configuration for X applications (e.g., rxvt-unicode)
 [ -r "${HOME}/.Xresources" ] && xrdb -merge "${HOME}/.Xresources"
+
+# Change the cursor with an arrow :)
+check_cmd xsetroot && xsetroot -cursor_name left_ptr &
 
 # Taffybar
 # if [ -z "$(pgrep taffybar)" ] ; then
@@ -48,17 +58,27 @@ if [ -x /usr/bin/feh ]; then
 fi
 
 # compton
-if [ -z "$(pgrep compton)" ] ; then
-    compton -b &
-fi
+#if [ -z "$(pgrep compton)" ] ; then
+    #compton -b &
+#fi
 
 # Network Applet
 if [ -z "$(pgrep nm-applet)" ] ; then
     nm-applet &
 fi
 
-# Google Drive
-#if [ -z "$(pgrep insync)" ] ; then
-#    insync start &
-#fi
+# NexCloud
+if [ -z "$(pgrep nextcloud)" ] ; then
+  check_cmd nextcloud && nextcloud &
+fi
+
+check_cmd xcompmg && xcompmgr &
+
+if [ -z "$(pgrep volti)" ] ; then
+  check_cmd volti && volti &
+fi
+
+if [ -z "$(pgrep workrave)" ] ; then
+  check_cmd workrave && workrave &
+fi
 # xbindkeys
