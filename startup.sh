@@ -31,13 +31,13 @@ if [ -z "$(pgrep redshift)" ] ; then
 fi
 
 # Screensaver
-if [ -z "$(pgrep xscreensaver)" ] ; then
-    xscreensaver -no-splash &
+if [ -z "$(pgrep gnome-screensaver)" ] ; then
+    gnome-screensaver &
 fi
 
 # Autolock
 if [ -z "$(pgrep xautolock)" ] ; then
-    xautolock -time 10 -locker "xscreensaver-command -lock" &
+    xautolock -time 10 -locker "gnome-screensaver-command -lock" &
 fi
 
 # Wallpaper
